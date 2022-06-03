@@ -17,6 +17,18 @@ http.createServer((req, res) => {
       res.end(JSON.stringify({name: 'jtr'}))
       return
     }
+    if (req.method === 'POST' && req.url === '/api/post') {
+      let post = ''
+      req.on('data', chunk => {
+        post += chunk
+      })
+      req.on('end', () => {
+        fs.writeFileSync('./dist/file.txt', post)
+        res.end('successfully')
+      })
+
+      return
+    }
     if (req.method === 'POST'){
       console.log(req.url, 'post===>')
       let post = ''

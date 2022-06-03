@@ -5,4 +5,5 @@
 ### Tasking
 
 - HTTP
-  - [ ] 服务端接收请求 
+  - [x] 服务端接收请求  happy flow `POST` `GET`
+  - [x] 上传文件 happy flow
