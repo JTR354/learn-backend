@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cache</title>
+  </head>
+  <body>
+    <h1>hello cache</h1>
+    <button id="btn">get reference data</button>
+    <script type="module">
+      // import "./main.js";
+      const btn = document.getElementById("btn");
+      const h1 = document.querySelector("h1");
+      btn.addEventListener("click", () => {
+        fetch("/api/ref-data", {
+          // headers: {
+          //   A: "aaa",
+          //   "Cache-Control": "max-age=3000",
+          // },
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            console.log(res);
+            h1.innerText = res.data.number;
+          });
+      });
+    </script>
+    <script src="/main.js"></script>
+  </body>
+</html>
