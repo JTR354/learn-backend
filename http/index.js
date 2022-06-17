@@ -1,7 +1,7 @@
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
-const PORT = 3000
+const PORT = 8080
 http.createServer((req, res) => {
 
   res.writeHead(200, {'Content-Type': 'text/html'})
@@ -13,8 +13,12 @@ http.createServer((req, res) => {
   if (req.url.startsWith('/api')) {
     if (req.method === 'GET') {
       console.log(req.url)
-      res.writeHead(200, {'Content-Type': 'text/json'})
-      res.end(JSON.stringify({name: 'jtr'}))
+      res.writeHead(200, {'Content-Type': 'text/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
+      // res.end(JSON.stringify({name: 'jtr'}))
+      const data = JSON.stringify({
+        data: { number: Math.random().toString(36).slice(2) },
+      })
+      res.end(data)
       return
     }
     if (req.method === 'POST' && req.url === '/api/post') {

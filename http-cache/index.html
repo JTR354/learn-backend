@@ -14,19 +14,29 @@
       const btn = document.getElementById("btn");
       const h1 = document.querySelector("h1");
       btn.addEventListener("click", () => {
-        fetch("/api/ref-data", {
-          // headers: {
-          //   A: "aaa",
-          //   "Cache-Control": "max-age=3000",
-          // },
-        })
-          .then((res) => {
-            return res.json();
-          })
-          .then((res) => {
-            console.log(res);
+        // fetch("/api/ref-data", {
+        //   // headers: {
+        //   //   A: "aaa",
+        //   //   "Cache-Control": "max-age=3000",
+        //   // },
+        // })
+        //   .then((res) => {
+        //     return res.json();
+        //   })
+        //   .then((res) => {
+        //     console.log(res);
+        //     h1.innerText = res.data.number;
+        //   });
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:8080/api/ref-data", true);
+        xhr.onload = function (e) {
+          if (this.status < 400) {
+            // console.log(this);
+            const res = JSON.parse(this.response);
             h1.innerText = res.data.number;
-          });
+          }
+        };
+        xhr.send();
       });
     </script>
     <script src="/main.js"></script>
